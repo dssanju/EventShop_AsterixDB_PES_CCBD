@@ -1,0 +1,45 @@
+1) Steps to be followed for EventShop installation mentioned in the following link:
+
+https://github.com/dssanju/EventShopAlpha/blob/master/EventShop%20Setup
+
+2) Install AsterixDB in your machine. The system currently works if AsterixDB is on localhost.
+Steps for installation in the following link:
+
+https://asterixdb.ics.uci.edu/documentation/install.html#Section1SingleMachineAsterixDBInstallation
+
+3) Execute the following commands in your AsterixDB web interface :
+
+create dataverse eventshop if not exists;
+
+use dataverse eventshop;
+
+create type STTPoint as open{
+start:string,
+end:string,
+latitude:double,
+longitude:double,
+latUnit:double,
+longUnit:double,
+value:double
+}
+
+create type STTStream as open{
+id:int64,
+theme:string,
+stt-point: STTPoint,
+isProc:boolean
+}
+
+create dataset STTStream(STTStream) primary key id;
+
+create type TweetMessageType as open{
+tweet-id:int64,
+latitude:double,
+longitude:double,
+date:datetime,
+text:string,
+p_latitude:double,
+p_longitude:double,
+username:string
+
+}
